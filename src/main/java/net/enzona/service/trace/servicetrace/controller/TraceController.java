@@ -18,12 +18,12 @@ public class TraceController {
     }
 
     @PostMapping
-    public Trace create(@RequestBody TraceDTO traceDTO) {
+    public ResponseEntity create(@RequestBody TraceDTO traceDTO) {
         return this.traceService.create(traceDTO);
     }
 
     @GetMapping
-    public List<Trace> list() {
+    public ResponseEntity list() {
         return this.traceService.findAll();
     }
 

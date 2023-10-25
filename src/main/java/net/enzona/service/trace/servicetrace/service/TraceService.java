@@ -21,18 +21,18 @@ public class TraceService {
         this.mapper = mapper;
     }
 
-    public Trace create(TraceDTO traceDTO) {
+    public ResponseEntity create(TraceDTO traceDTO) {
         Trace trace = mapper.map(traceDTO);
-        return this.traceRepository.save(trace);
+        return new ResponseEntity<>(this.traceRepository.save(trace), HttpStatus.CREATED);
+//        return this.traceRepository.save(trace);
 //        return new ResponseEntity(this.traceRepository.save(trace), HttpStatus.CREATED);
     }
 
-    public List<Trace> findAll() {
-        return this.traceRepository.findAll();
+    public ResponseEntity findAll() {
+        return ResponseEntity.ok(this.traceRepository.findAll());
     }
 
     public ResponseEntity findByUUID(String uuid) {
-//        Optional<Trace> optionalTrace = this.traceRepository.findById(uuid);
         return traceRepository.findById(uuid)
                 .map(trace -> new ResponseEntity<>(trace, HttpStatus.OK)).
                 orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
